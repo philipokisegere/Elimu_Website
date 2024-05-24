@@ -27,7 +27,7 @@ function Nav() {
                     </li>
 
                     <li>
-                    <a className="text-gray-500 transition hover:text-gray-500/75" href="/staff"> Our Team</a>
+                    <a className="text-gray-500 transition hover:text-gray-500/75" href="/staff"> Our Staff</a>
                     </li>
 
                     <li>
