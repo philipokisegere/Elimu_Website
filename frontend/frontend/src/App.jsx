@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import {  Route, Routes, Navigate } from "react-router-dom";
 import { useState } from "react";
 
 // import "./App.css";
@@ -23,7 +23,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+     
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/news" element={<NewsAndUpdates />} />
@@ -37,7 +37,7 @@ function App() {
           {/* <Route path = "/unauthorized" element={<Unauthorized/>}/> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+  
     </>
   );
 }
