@@ -7,33 +7,46 @@ import Nav from "../components/Nav";
 
 const Staff = () => {
   const [staffs, setStaffs] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   async function getStaff() {
-    const res = await api.get("/staff");
+    try {
+      setLoading(true);
+      const res = await api.get("/staff");
 
-    setStaffs(res.data);
+      setStaffs(res.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
     getStaff();
   }, []);
 
-  
+  const currentUser = localStorage.getItem(USER);
 
   return (
-      <>
-          <Nav/>
+    <>
+      <Nav />
+      {loading ? (
     
-      <div className="flex flex-wrap items-center justify-center p-2">
-        {staffs.length > 0 ? (
-          staffs.map((staff) => {
-            return <SaffCard key={staff.id} staff={staff} />;
-          })
-        ) : (
-          <div>No staffs</div>
-        )}
-          </div>
-          <Footer/>
+        <p className="text-center text-blue-500">Loading....</p>
+        
+      ) : (
+        <div className="flex flex-wrap items-center justify-center p-2">
+          {staffs.length > 0 ? (
+            staffs.map((staff) => {
+              return <SaffCard key={staff.id} staff={staff} />;
+            })
+          ) : (
+            <div>No staffs</div>
+          )}
+        </div>
+      )}
+      <Footer />
     </>
   );
 };
