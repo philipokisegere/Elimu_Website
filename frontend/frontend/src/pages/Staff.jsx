@@ -18,12 +18,12 @@ const Staff = () => {
     getStaff();
   }, []);
 
-  const currentUser = localStorage.getItem(USER);
+  
 
   return (
       <>
           <Nav/>
-      <div>Welcome {currentUser}</div>
+    
       <div className="flex flex-wrap items-center justify-center p-2">
         {staffs.length > 0 ? (
           staffs.map((staff) => {
