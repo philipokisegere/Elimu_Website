@@ -5,7 +5,8 @@ import { ACCESS_TOKEN } from "./constants";
 
 const api = axios.create({
   //   baseURL: import.meta.env.VITE_API_URL,
-    baseURL: "http://127.0.0.1:5000",
+    // baseURL: "http://127.0.0.1:5000",
+   baseURL: "https://elimu-website.onrender.com",
     
 });
 
