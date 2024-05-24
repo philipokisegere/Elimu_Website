@@ -7,6 +7,8 @@ import Footer from "./Footer";
 const SignUp = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('')
+  const [message,setMessage]=useState('')
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -71,12 +73,17 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      setLoading(true);
-      try {
+        try {
+          setLoading(true);
         const res = await api.post("auth/user/register", form);
-        navigate("/signin");
+        setMessage()
+        setErrorMsg('')
+        setTimeout(()=>{
+          navigate('/user/dashboard');
+        },1000)   
       } catch (error) {
-        alert(error);
+        const errorMsg = error.response?.data?.error || 'An error occurred';
+        setErrorMsg(errorMsg);
       } finally {
         setLoading(false);
       }
@@ -88,11 +95,13 @@ const SignUp = () => {
   return (
     <div>
       <Nav />
-
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              {message && <p className="text-green-500">{message}</p>}
+              {errorMsg && <p className="text-red-500">{errorMsg}</p>}    
+              {loading && <p className="text-green-500">Creating User...</p>}    
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create an account
               </h1>
